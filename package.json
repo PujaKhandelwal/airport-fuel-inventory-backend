@@ -1,0 +1,31 @@
+{
+  "name": "airport-fuel-inventory-backend",
+  "version": "1.0.0",
+  "description": "Maintain and Manage fuel consumption at airport",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PujaKhandelwal/airport-fuel-inventory-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PujaKhandelwal/airport-fuel-inventory-backend/issues"
+  },
+  "homepage": "https://github.com/PujaKhandelwal/airport-fuel-inventory-backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "config": "^3.3.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "joi": "^13.0.1",
+    "joi-objectid": "^2.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
+    "mongoose": "^5.11.11"
+  }
+}
