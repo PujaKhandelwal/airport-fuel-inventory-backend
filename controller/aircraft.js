@@ -12,8 +12,22 @@ router.post("/", auth, async (req, res) => {
     console.log('Correct');
     console.log(req.body);
 
-    let aircraft = new AircraftDetail(_.pick(req.body, ["aircraft_no", "airline", "source", "destination"]));
-    console.log(aircraft);
+    let aircraft = await AircraftDetail.findOne({ aircraft_no: req.body.aircraft_no.toUpperCase() });
+    if (aircraft) return res.status(400).json({ error: "Aircraft already present." });
+
+    // let aircraft = new AircraftDetail(_.pick(req.body, ["aircraft_no", "airline", "source", "destination"]));
+    aircraft = new AircraftDetail(
+      {
+        aircraft_no: req.body.aircraft_no.toUpperCase(),
+        airline: req.body.airline.toUpperCase(),
+        source: req.body.source.toUpperCase(),
+        destination: req.body.destination.toUpperCase()
+         
+      }
+  )  
+
+
+
     await aircraft.save();
     res.json({ message: "Aircraft Added!!" });
   });

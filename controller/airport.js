@@ -8,14 +8,23 @@ const router = express.Router();
 router.post("/", auth, async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
-  
-    let airportdetail = await AirportDetail.findOne({ airport_name: req.body.airport_name });
+    // console.log()
+    let airportdetail = await AirportDetail.findOne({ airport_name: req.body.airport_name.toUpperCase() });
     if (airportdetail) return res.status(400).json({ error: "Airport Details is already present." });
+    console.log(airportdetail);
 
     if(req.body.fuel_capacity < req.body.fuel_available)
       return res.status(400).json({ error: "Overflow." });
   
-    airportdetail = new AirportDetail(_.pick(req.body, ["airport_name", "fuel_capacity", "fuel_available"]));
+    // airportdetail = new AirportDetail(_.pick(req.body, ["airport_name", "fuel_capacity", "fuel_available"]));
+    airportdetail = new AirportDetail(
+      {
+        airport_name: req.body.airport_name.toUpperCase(),
+        fuel_capacity: req.body.fuel_capacity,
+        fuel_available: req.body.fuel_available
+         
+      }
+  ) 
     
     await airportdetail.save();
     res.json({ message: "Airport Details Added Successfully !!" });
@@ -33,13 +42,13 @@ router.put("/", auth, async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
 
-    let airportdetail = await AirportDetail.findOne({ airport_name: req.body.airport_name });
+    let airportdetail = await AirportDetail.findOne({ airport_name: req.body.airport_name.toUpperCase() });
     if (!airportdetail) return res.status(400).json({ error: "Airport not present." });
 
     if(req.body.fuel_capacity < req.body.fuel_available)
     return res.status(400).json({ error: "Overflow." });
 
-    await AirportDetail.findByIdAndUpdate(airportdetail._id, {airport_name: req.body.airport_name, 
+    await AirportDetail.findByIdAndUpdate(airportdetail._id, {airport_name: req.body.airport_name.toUpperCase(), 
                 fuel_capacity: req.body.fuel_capacity, fuel_available: req.body.fuel_available});
 
     res.json({ message: "Updated Successfully" });

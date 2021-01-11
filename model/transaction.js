@@ -13,14 +13,14 @@ const transactionSchema = new mongoose.Schema({
         maxlength: 3,
         trim: true
     },
-    airport_id: {
+    airport_name: {
         type: String,
         required: true,
         minlength: 1,
         maxlength: 255,
         trim: true
     },
-    aircraft_id: {
+    aircraft_no: {
         type: String,
         minlength: 1,
         maxlength: 255,

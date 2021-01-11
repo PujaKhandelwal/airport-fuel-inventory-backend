@@ -5,6 +5,7 @@ const aircraftSchema = new mongoose.Schema({
     aircraft_no: {
       type: String,
       required: true,
+      unique: true,
       minlength: 1,
       maxlength: 255,
       trim: true
